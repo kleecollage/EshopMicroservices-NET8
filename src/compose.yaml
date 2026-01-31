@@ -5,3 +5,9 @@
       context: .
       dockerfile: Catalog.API/Dockerfile
 
+  buildingblocks:
+    image: buildingblocks
+    build:
+      context: .
+      dockerfile: BuildingBlocks/BuildingBlocks/Dockerfile
+

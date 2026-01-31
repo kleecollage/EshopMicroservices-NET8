@@ -11,6 +11,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		compose.yaml = compose.yaml
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "BuildingBlocks", "BuildingBlocks", "{F638D7B9-72D3-4F0D-B8F6-93DC17C7DE75}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BuildingBlocks", "BuildingBlocks\BuildingBlocks\BuildingBlocks.csproj", "{6D31FA75-767F-4BFC-B4D4-A903D85F113F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -19,11 +23,16 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{343F0A14-5576-404D-81C4-F07A12CAD7E9} = {1F816387-2C13-4B9C-AFF6-55BE21F607A3}
 		{8A32013C-4A66-4EEC-BA14-321EA3DEEBD2} = {343F0A14-5576-404D-81C4-F07A12CAD7E9}
+		{6D31FA75-767F-4BFC-B4D4-A903D85F113F} = {F638D7B9-72D3-4F0D-B8F6-93DC17C7DE75}
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{8A32013C-4A66-4EEC-BA14-321EA3DEEBD2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{8A32013C-4A66-4EEC-BA14-321EA3DEEBD2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8A32013C-4A66-4EEC-BA14-321EA3DEEBD2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8A32013C-4A66-4EEC-BA14-321EA3DEEBD2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6D31FA75-767F-4BFC-B4D4-A903D85F113F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6D31FA75-767F-4BFC-B4D4-A903D85F113F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6D31FA75-767F-4BFC-B4D4-A903D85F113F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6D31FA75-767F-4BFC-B4D4-A903D85F113F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

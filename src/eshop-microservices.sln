@@ -9,6 +9,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{C299D9C8-D8C6-49A0-9242-14A9D5C08770}"
 	ProjectSection(SolutionItems) = preProject
 		compose.yaml = compose.yaml
+		docker-compose.override.yaml = docker-compose.override.yaml
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "BuildingBlocks", "BuildingBlocks", "{F638D7B9-72D3-4F0D-B8F6-93DC17C7DE75}"

@@ -1,4 +1,11 @@
 ﻿services:
+  catalogdb:
+    image: postgres
+
+volumes:
+  postgres_catalog:
+    
+    
   catalog.api:
     image: catalog.api
     build:
@@ -10,4 +17,3 @@
     build:
       context: .
       dockerfile: BuildingBlocks/BuildingBlocks/Dockerfile
-

@@ -8,6 +8,9 @@
 ## Get latest from https://github.com/github/gitignore/blob/main/Dotnet.gitignore
 
 .idea
+.vs/
+*.user
+*.DotSettings.user
 
 # Build results
 [Dd]ebug/

@@ -1,6 +1,6 @@
 var builder = WebApplication.CreateBuilder(args);
 var assembly = typeof(Program).Assembly;
-// SERVICES
+// ====================   SERVICES   ==================== //
 builder.Services.AddMediatR(config =>
 {
     config.RegisterServicesFromAssembly(assembly);
@@ -18,12 +18,16 @@ builder.Services.AddMarten(opts =>
     // opts.AutoCreateSchemaObjects()
 }).UseLightweightSessions();
 
+// Data seed
+if (builder.Environment.IsDevelopment())
+    builder.Services.InitializeMartenWith<CatalogInitialData>();
+
 // Get more readable errors with JSON format 
 builder.Services.AddExceptionHandler<CustomExceptionHandler>();
 
 
+// ====================   HTTP request pipeline   ==================== //
 var app = builder.Build();
-// HTTP request pipeline
 app.MapCarter();
 
 // Get more readable errors with JSON format 

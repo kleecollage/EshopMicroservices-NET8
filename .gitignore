@@ -11,6 +11,7 @@
 .vs/
 *.user
 *.DotSettings.user
+**/.DS_Store
 
 # Build results
 [Dd]ebug/

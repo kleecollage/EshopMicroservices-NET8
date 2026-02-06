@@ -6,10 +6,11 @@
     image: ${DOCKER_REGISTRY-}catalogapi
     build:
       context: .
-      dockerfile: Catalog.API/Dockerfile
-  basket:
-    image: basket
+      dockerfile: Services/Catalog/Catalog.API/Dockerfile
+
+  basket.api:
+    image: basket.api
     build:
       context: .
-      dockerfile: Services/Basket/Basket/Dockerfile
+      dockerfile: Services/Basket/Basket.API/Dockerfile
 

@@ -21,6 +21,7 @@ builder.Services.AddMarten(opts =>
     // opts.AutoCreateSchemaObjects;
 }).UseLightweightSessions();
 
+builder.Services.AddScoped<IBasketRepository, BasketRepository>();
 
 
 // ==============================   Configure the HTTP request pipeline   ============================== //

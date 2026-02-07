@@ -1,4 +1,5 @@
 ﻿services:
+  # DATABASES
   catalogdb:
     image: postgres:16
   
@@ -8,17 +9,18 @@
   distributedcache:
     image: redis
     
+  # MICROSERCICES
   catalog.api:
     image: ${DOCKER_REGISTRY-}catalogapi
     build:
       context: .
       dockerfile: Services/Catalog/Catalog.API/Dockerfile
     
-#  basket.api:
-#    image: basket.api
-#    build:
-#      context: .
-#      dockerfile: Services/Basket/Basket.API/Dockerfile
+  basket.api:
+    image: ${DOCKER_REGISTRY-}basketapi
+    build:
+      context: .
+      dockerfile: Services/Basket/Basket.API/Dockerfile
 
 volumes:
   postgres_catalog:

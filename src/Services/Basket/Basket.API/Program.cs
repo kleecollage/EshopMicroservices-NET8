@@ -1,7 +1,7 @@
-// ==============================   Add services to the container   ============================== //
-using BuildingBlocks.Exceptions.Handler;
-using Microsoft.Extensions.Caching.Distributed;
+using HealthChecks.UI.Client;
+using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 
+// ==============================   Add services to the container   ============================== //
 var builder = WebApplication.CreateBuilder(args);
 var assembly = typeof(Program).Assembly;
 
@@ -41,10 +41,13 @@ builder.Services.AddStackExchangeRedisCache(options =>
     options.InstanceName = "Basket";
 });
 
-
 // Get more readable errors with JSON format 
 builder.Services.AddExceptionHandler<CustomExceptionHandler>();
 
+// Health check
+builder.Services.AddHealthChecks()
+    .AddNpgSql(builder.Configuration.GetConnectionString("Database")!)
+    .AddRedis(builder.Configuration.GetConnectionString("Redis")!);
 
 // ==============================   Configure the HTTP request pipeline   ============================== //
 var app = builder.Build();
@@ -53,5 +56,12 @@ app.MapCarter();
 
 // Get more readable errors with JSON format 
 app.UseExceptionHandler(options => { });
+
+// Health check
+app.UseHealthChecks("/health",
+    new HealthCheckOptions
+    {
+        ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
+    });
 
 app.Run();

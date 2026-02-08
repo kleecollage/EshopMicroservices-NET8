@@ -17,6 +17,8 @@ builder.Services.AddDbContext<DiscountContext>(opts =>
 // ==============================   Configure the HTTP request pipeline.   ============================== //
 var app = builder.Build();
 
+app.UseMigration();
+    
 app.MapGrpcService<DiscountService>();
 
 app.MapGet("/",

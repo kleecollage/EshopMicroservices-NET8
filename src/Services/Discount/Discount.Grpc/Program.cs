@@ -1,12 +1,23 @@
+using Discount.Grpc.Data;
+using Discount.Grpc.Services;
+using Microsoft.EntityFrameworkCore;
+
 // ==============================   Add services to the container.   ============================== //
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddGrpc();
 
+// SQLite DB
+builder.Services.AddDbContext<DiscountContext>(opts =>
+{
+    opts.UseSqlite(builder.Configuration.GetConnectionString("Database"));
+});
 
 
 // ==============================   Configure the HTTP request pipeline.   ============================== //
 var app = builder.Build();
+
+app.MapGrpcService<DiscountService>();
 
 app.MapGet("/",
     () =>

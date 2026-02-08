@@ -9,7 +9,7 @@
   distributedcache:
     image: redis
     
-  # MICROSERCICES
+  # MICROSERVICES
   catalog.api:
     image: ${DOCKER_REGISTRY-}catalogapi
     build:
@@ -22,11 +22,11 @@
       context: .
       dockerfile: Services/Basket/Basket.API/Dockerfile
 
-#  discount.grpc:
-#    image: discount.grpc
-#    build:
-#      context: .
-#      dockerfile: Services/Discount/Discount.Grpc/Dockerfile
+  discount.grpc:
+    image: ${DOCKER_REGISTRY-}discountgrpc
+    build:
+      context: .
+      dockerfile: Services/Discount/Discount.Grpc/Dockerfile
       
 volumes:
   postgres_catalog:

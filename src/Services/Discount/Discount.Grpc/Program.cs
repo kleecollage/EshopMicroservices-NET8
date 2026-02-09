@@ -1,11 +1,20 @@
 using Discount.Grpc.Data;
 using Discount.Grpc.Services;
+using Microsoft.AspNetCore.Server.Kestrel.Core;
 using Microsoft.EntityFrameworkCore;
 
 // ==============================   Add services to the container.   ============================== //
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddGrpc();
+
+builder.WebHost.ConfigureKestrel(options =>
+{
+    options.ListenAnyIP(8080, listen =>
+    {
+        listen.Protocols = HttpProtocols.Http2;
+    });
+});
 
 // SQLite DB
 builder.Services.AddDbContext<DiscountContext>(opts =>

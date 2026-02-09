@@ -1,4 +1,5 @@
 services:
+  # ==============================   DATA BASES   ============================== #
   catalogdb:
     container_name: catalogdb
     environment:
@@ -28,7 +29,7 @@ services:
     restart: no
     ports:
       - "6379:6379"
-        
+  # ==============================   MICROSERVICES   ============================== #
   catalog.api:
     container_name: Catalog.API
     environment:
@@ -53,9 +54,11 @@ services:
       # - ASPNETCORE_HTTPS_PORTS=8081
       - ConnectionStrings__Database=Server=basketdb;Port=5432;Database=BasketDb;User Id=postgres;Password=postgres;Include Error Detail=true
       - ConnectionStrings__Redis=distributedcache:6379
+      - GrpcSettings__DiscountUrl=http://discount.grpc:8080
     depends_on:
       - basketdb
       - distributedcache
+      - discount.grpc
     ports:
       - "6001:8080"
       # - "6061:8081"

@@ -1,3 +1,4 @@
+using Discount.Grpc;
 using HealthChecks.UI.Client;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 
@@ -35,13 +36,32 @@ builder.Services.AddScoped<IBasketRepository, BasketRepository>();
 
 // Using Scrutor
 builder.Services.Decorate<IBasketRepository, CachedBasketRepository>();
+
+// Redis
 builder.Services.AddStackExchangeRedisCache(options =>
 {
     options.Configuration = builder.Configuration.GetConnectionString("Redis");
     options.InstanceName = "Basket";
 });
 
-// Get more readable errors with JSON format 
+// gRPC services
+builder.Services.AddGrpcClient<DiscountService.DiscountServiceClient>(options =>
+{
+    options.Address = new Uri(builder.Configuration["GrpcSettings:DiscountUrl"]!);
+}).ConfigurePrimaryHttpMessageHandler(() =>
+{
+    return new SocketsHttpHandler
+    {
+        EnableMultipleHttp2Connections = true
+    };
+    // fix invalid ssl certificate. Not for prod!
+    return new HttpClientHandler
+    {
+        ServerCertificateCustomValidationCallback = HttpClientHandler.DangerousAcceptAnyServerCertificateValidator
+    };
+});
+
+// Get more readable errors with JSON format. (Cross-Cutting services)
 builder.Services.AddExceptionHandler<CustomExceptionHandler>();
 
 // Health check

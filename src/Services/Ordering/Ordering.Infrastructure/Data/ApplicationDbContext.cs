@@ -2,9 +2,9 @@ using System.Reflection;
 
 namespace Ordering.Infrastructure.Data;
 
-public class ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : DbContext(options)
+public class ApplicationDbContext : DbContext
 {
-    // public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options) { }
+    public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options) { }
     
     // Tables
     public DbSet<Customer> Customers => Set<Customer>();

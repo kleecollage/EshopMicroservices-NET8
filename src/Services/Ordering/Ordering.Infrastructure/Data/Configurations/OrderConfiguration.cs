@@ -15,7 +15,7 @@ public class OrderConfiguration : IEntityTypeConfiguration<Order>
         // 1:N relation
         builder.HasOne<Customer>().WithMany().HasForeignKey(o => o.CustomerId).IsRequired();
         // N:1 relation
-        builder.HasMany<OrderItem>().WithOne().HasForeignKey(oi => oi.OrderId);
+        // builder.HasMany<OrderItem>().WithOne().HasForeignKey(oi => oi.OrderId);
 
         builder.ComplexProperty(o => o.OrderName, nameBuilder =>
         {
@@ -58,11 +58,12 @@ public class OrderConfiguration : IEntityTypeConfiguration<Order>
 
         builder.Property(o => o.Status)
             .HasDefaultValue(OrderStatus.Draft)
+            .HasSentinel(OrderStatus.Draft)
             .HasConversion(
                 s => s.ToString(),
                 dbStatus => (OrderStatus)Enum.Parse(typeof(OrderStatus), dbStatus)
             );
 
-        builder.Property(o => o.TotalPrice);
+        builder.Property(o => o.TotalPrice).HasPrecision(18, 2);
     }
 }

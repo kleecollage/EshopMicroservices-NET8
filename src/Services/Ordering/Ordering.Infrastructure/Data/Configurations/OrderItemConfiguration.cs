@@ -9,14 +9,17 @@ public class OrderItemConfiguration : IEntityTypeConfiguration<OrderItem>
             orderItemId => orderItemId.Value,
             dbId => OrderItemId.Of(dbId)
         );
-
+        
+        builder.Property(oi => oi.OrderId).HasConversion(
+            orderId => orderId.Value,
+            dbId => OrderId.Of(dbId)
+        );
+        
         // 1:N relation
         builder.HasOne<Product>().WithMany().HasForeignKey(oi => oi.ProductId);
 
         builder.Property(oi => oi.Quantity).IsRequired();
         
-        builder.Property(oi => oi.Price).IsRequired();
-
-
+        builder.Property(oi => oi.Price).HasPrecision(18, 2).IsRequired();
     }
 }

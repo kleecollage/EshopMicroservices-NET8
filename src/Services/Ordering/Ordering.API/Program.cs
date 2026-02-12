@@ -8,7 +8,7 @@ using Ordering.Infrastructure.Data.Extensions;
 // Infrastructure - EF Core
 // Application - MediatR
 // API - Carter, HealthChecks, ...
-// ------------------------------s
+// ------------------------------
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services

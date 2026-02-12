@@ -13,7 +13,7 @@ using Ordering.Infrastructure.Data;
 namespace Ordering.Infrastructure.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20260211231614_Initial")]
+    [Migration("20260212022620_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
@@ -88,6 +88,7 @@ namespace Ordering.Infrastructure.Data.Migrations
                         .HasDefaultValue("Draft");
 
                     b.Property<decimal>("TotalPrice")
+                        .HasPrecision(18, 2)
                         .HasColumnType("decimal(18,2)");
 
                     b.ComplexProperty<Dictionary<string, object>>("BillingAddress", "Ordering.Domain.Models.Order.BillingAddress#Address", b1 =>
@@ -105,6 +106,7 @@ namespace Ordering.Infrastructure.Data.Migrations
                                 .HasColumnType("nvarchar(50)");
 
                             b1.Property<string>("EmailAddress")
+                                .IsRequired()
                                 .HasMaxLength(50)
                                 .HasColumnType("nvarchar(50)");
 
@@ -182,6 +184,7 @@ namespace Ordering.Infrastructure.Data.Migrations
                                 .HasColumnType("nvarchar(50)");
 
                             b1.Property<string>("EmailAddress")
+                                .IsRequired()
                                 .HasMaxLength(50)
                                 .HasColumnType("nvarchar(50)");
 
@@ -233,10 +236,8 @@ namespace Ordering.Infrastructure.Data.Migrations
                     b.Property<Guid>("OrderId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid?>("OrderId1")
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<decimal>("Price")
+                        .HasPrecision(18, 2)
                         .HasColumnType("decimal(18,2)");
 
                     b.Property<Guid>("ProductId")
@@ -248,8 +249,6 @@ namespace Ordering.Infrastructure.Data.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("OrderId");
-
-                    b.HasIndex("OrderId1");
 
                     b.HasIndex("ProductId");
 
@@ -279,6 +278,7 @@ namespace Ordering.Infrastructure.Data.Migrations
                         .HasColumnType("nvarchar(100)");
 
                     b.Property<decimal>("Price")
+                        .HasPrecision(18, 2)
                         .HasColumnType("decimal(18,2)");
 
                     b.HasKey("Id");
@@ -298,14 +298,10 @@ namespace Ordering.Infrastructure.Data.Migrations
             modelBuilder.Entity("Ordering.Domain.Models.OrderItem", b =>
                 {
                     b.HasOne("Ordering.Domain.Models.Order", null)
-                        .WithMany()
+                        .WithMany("OrderItems")
                         .HasForeignKey("OrderId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.HasOne("Ordering.Domain.Models.Order", null)
-                        .WithMany("OrderItems")
-                        .HasForeignKey("OrderId1");
 
                     b.HasOne("Ordering.Domain.Models.Product", null)
                         .WithMany()

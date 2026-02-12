@@ -9,6 +9,9 @@
   distributedcache:
     image: redis
     
+  orderdb:
+    image: mcr.microsoft.com/mssql/server
+    
   # MICROSERVICES
   catalog.api:
     image: ${DOCKER_REGISTRY-}catalogapi

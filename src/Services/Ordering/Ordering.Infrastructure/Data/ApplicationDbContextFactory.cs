@@ -9,7 +9,7 @@ public class ApplicationDbContextFactory : IDesignTimeDbContextFactory<Applicati
         var optionsBuilder = new DbContextOptionsBuilder<ApplicationDbContext>();
 
         optionsBuilder.UseSqlServer(
-            "Server=localhost;Database=OrderingDb;User Id=sa;Password=Admin123*;TrustServerCertificate=True");
+            "Server=localhost;Database=OrderDb;User Id=sa;Password=Admin123*;Encrypt=False;TrustServerCertificate=True");
 
         return new ApplicationDbContext(optionsBuilder.Options);
     }

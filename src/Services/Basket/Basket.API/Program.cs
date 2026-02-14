@@ -1,5 +1,6 @@
 using Discount.Grpc;
 using HealthChecks.UI.Client;
+using BuildingBlocks.Messaging.MassTransit;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 
 // ==============================   Add services to the container   ============================== //
@@ -16,8 +17,10 @@ builder.Services.AddMediatR(config =>
 // FluentValidation
 builder.Services.AddValidatorsFromAssembly(assembly);
 
+// Minimal API endpoints
 builder.Services.AddCarter();
 
+// Postgres DB documents
 builder.Services.AddMarten(opts =>
 {
     opts.Connection(builder.Configuration.GetConnectionString("Database")!);
@@ -55,11 +58,14 @@ builder.Services.AddGrpcClient<DiscountService.DiscountServiceClient>(options =>
         EnableMultipleHttp2Connections = true
     };
     // fix invalid ssl certificate. Not for prod!
-    return new HttpClientHandler
-    {
-        ServerCertificateCustomValidationCallback = HttpClientHandler.DangerousAcceptAnyServerCertificateValidator
-    };
+    // return new HttpClientHandler
+    // {
+    //     ServerCertificateCustomValidationCallback = HttpClientHandler.DangerousAcceptAnyServerCertificateValidator
+    // };
 });
+
+// Async Communication Services
+builder.Services.AddMessageBroker(builder.Configuration);
 
 // Get more readable errors with JSON format. (Cross-Cutting services)
 builder.Services.AddExceptionHandler<CustomExceptionHandler>();

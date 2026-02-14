@@ -38,14 +38,11 @@ public class Order : Aggregate<OrderId>
     
     public void Update(OrderName orderName, Address shippingAddress, Address billingAddress, Payment payment, OrderStatus status)
     {
-        var order = new Order
-        {
-            OrderName = orderName,
-            ShippingAddress = shippingAddress,
-            BillingAddress = billingAddress,
-            Payment = payment,
-            Status = status
-        };
+        OrderName = orderName;
+        ShippingAddress = shippingAddress;
+        BillingAddress = billingAddress;
+        Payment = payment;
+        Status = status;
 
         AddDomainEvent(new OrderUpdatedEvent(this));
     }

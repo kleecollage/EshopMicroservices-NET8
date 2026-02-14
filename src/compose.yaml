@@ -31,11 +31,11 @@
       context: .
       dockerfile: Services/Discount/Discount.Grpc/Dockerfile
   
-#  ordering.api:
-#    image: ordering.api
-#    build:
-#      context: .
-#      dockerfile: Services/Ordering/Ordering.API/Dockerfile
+  ordering.api:
+    image: ordering.api
+    build:
+      context: .
+      dockerfile: Services/Ordering/Ordering.API/Dockerfile
       
 volumes:
   postgres_catalog:

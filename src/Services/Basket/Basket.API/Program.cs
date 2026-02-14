@@ -64,7 +64,7 @@ builder.Services.AddGrpcClient<DiscountService.DiscountServiceClient>(options =>
     // };
 });
 
-// Async Communication Services
+// Async Communication Services (as a publisher, there's no need to declare assembly)
 builder.Services.AddMessageBroker(builder.Configuration);
 
 // Get more readable errors with JSON format. (Cross-Cutting services)

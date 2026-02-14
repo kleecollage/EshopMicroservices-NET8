@@ -35,6 +35,7 @@ public class CheckoutBasketCommandHandler(IBasketRepository repository, IPublish
         
         await publishEndpoint.Publish(eventMessage, cancellationToken);
         
+        // Dual write problem
         await repository.DeleteBasket(command.BasketCheckoutDto.UserName, cancellationToken);
         
         return new CheckoutBasketResult(true);

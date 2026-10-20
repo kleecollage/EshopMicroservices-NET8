@@ -15,6 +15,5 @@ public class OrderCreatedEventHandler(IPublishEndpoint publishEndpoint, IFeature
             var orderCreatedIntegrationEvent = domainEvent.order.ToOrderDto();
             await publishEndpoint.Publish(orderCreatedIntegrationEvent, cancellationToken);
         }
-        
     }
 }

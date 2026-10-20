@@ -17,7 +17,9 @@ public static class DependencyInjection
             config.AddOpenBehavior(typeof(LoggingBehavior<,>));
         });
 
+        // Flags to mark where the masstransit should publish
         services.AddFeatureManagement();
+        
         // Async Communication Services (as a consumer, I must declare assembly)
         services.AddMessageBroker(configuration, Assembly.GetExecutingAssembly());
         

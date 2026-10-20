@@ -12,6 +12,9 @@
   orderdb:
     image: mcr.microsoft.com/mssql/server
     
+  messagebroker:
+    image: rabbitmq:management
+    
   # MICROSERVICES
   catalog.api:
     image: ${DOCKER_REGISTRY-}catalogapi

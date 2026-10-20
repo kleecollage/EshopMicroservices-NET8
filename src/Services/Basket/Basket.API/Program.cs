@@ -53,15 +53,20 @@ builder.Services.AddGrpcClient<DiscountService.DiscountServiceClient>(options =>
     options.Address = new Uri(builder.Configuration["GrpcSettings:DiscountUrl"]!);
 }).ConfigurePrimaryHttpMessageHandler(() =>
 {
+    // if (builder.Environment.IsDevelopment())
+    // {
+    //     return new HttpClientHandler
+    //     {
+    //         // fix invalid ssl certificate. Not for prod!
+    //         ServerCertificateCustomValidationCallback = HttpClientHandler.DangerousAcceptAnyServerCertificateValidator
+    //     };
+    // }
+    
     return new SocketsHttpHandler
     {
         EnableMultipleHttp2Connections = true
     };
-    // fix invalid ssl certificate. Not for prod!
-    // return new HttpClientHandler
-    // {
-    //     ServerCertificateCustomValidationCallback = HttpClientHandler.DangerousAcceptAnyServerCertificateValidator
-    // };
+    
 });
 
 // Async Communication Services (as a publisher, there's no need to declare assembly)

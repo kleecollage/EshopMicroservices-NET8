@@ -13,4 +13,9 @@
       </Content>
     </ItemGroup>
 
+    <ItemGroup>
+      <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.23.0" />
+      <PackageReference Include="Refit.HttpClientFactory" Version="16.4.0" />
+    </ItemGroup>
+
 </Project>
